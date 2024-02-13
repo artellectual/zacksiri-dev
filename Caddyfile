@@ -1,0 +1,9 @@
+{
+  auto_https off
+  admin off
+}
+
+:3000 {
+  root * /var/lib/zacksiri-dev/dist
+  file_server
+}
