@@ -3,34 +3,24 @@ layout: ../layouts/AboutLayout.astro
 title: "About"
 ---
 
-AstroPaper is a minimal, responsive and SEO-friendly Astro blog theme. I designed and crafted this based on [my personal blog](https://satnaing.dev/blog).
 
-This theme is aimed to be accessible out of the box. Light and dark mode are supported by
-default and additional color schemes can also be configured.
+Hey, my name is Zack Siri, I'm currently working on [opsmaru.com](https://opsmaru.com). OpsMaru provides developers with the tools that make it easy to build their own PaaS on their infrastructure.
 
-This theme is self-documented \_ which means articles/posts in this theme can also be considered as documentations. So, see the documentation for more info.
+I believe it's important that developers have the choice and control over their own infrastructure. It's important that developers don't have to choose between an easy but expensive or cheap but requires effort to manage. OpsMaru bridges this gap and makes it easy to run your own self-service Platform as a Service.
 
-<div>
-  <img src="/assets/dev.svg" class="sm:w-1/2 mx-auto" alt="coding dev illustration">
-</div>
 
-## Tech Stack
+## Goals
 
-This theme is written in vanilla JavaScript (+ TypeScript for type checking) and a little bit of ReactJS for some interactions. TailwindCSS is used for styling; and Markdown is used for blog contents.
+The ability to turn your servers into serverless in a matter of minutes will bring about new ways of doing computing to the world. Imagine the following:
 
-## Features
+- Being able to run your own AI model on your own servers and keeping the costs low.
+- Launching a new startup on a cheap VPS without having to worry about managing servers.
+- Enabling your team to focus on shipping features without worrying about the DevOps work.
+- Being able to sell your excess compute on a marketplace.
+- Being able to rent compute you don't have from other individuals, not a giant corporation.
+- Being able to sell your opensource software without having to build any infrastructure.
 
-Here are certain features of this site.
 
-- fully responsive and accessible
-- SEO-friendly
-- light & dark mode
-- fuzzy search
-- super fast performance
-- draft posts
-- pagination
-- sitemap & rss feed
-- highly customizable
+Yes I'm talking about the next big shift in computing.
 
-If you like this theme, you can star/contribute to the [repo](https://github.com/satnaing/astro-paper).  
-Or you can even give any feedback via my [email](mailto:contact@satnaing.dev).
+When we drive our car to get to our destination, we don't think about the road. We know it's there, we know when we need to cross the river there is a bridge there to support us. We focus on getting to our destination without worrying about the infrastructure between us and our destination. That's what I believe software infrastructure should be, seamless and invisible to our experience.
