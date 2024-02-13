@@ -1,0 +1,51 @@
+dependencies:
+  build:
+    - nodejs-current
+    - npm
+  runtime:
+    - caddy
+    - bash
+    - curl
+    - s6
+    - jq
+    - ca-certificates
+    - zacksiri-dev-openrc
+
+stack: alpine/3.19
+
+build:
+  command: |
+    npm install
+    npm run build
+  destinations:
+    - dist
+    - Caddyfile
+
+run:
+  name: zacksiri-dev
+  services:
+    - binary: caddy
+      name: web
+      path: /usr/sbin
+      start:
+        call: run --config /var/lib/zacksiri-dev/Caddyfile
+
+hook:
+  post-deinstall: |
+    rc-service zacksiri-dev stop
+    rc-update del zacksiri-dev
+  post-install: |
+    rc-update add zacksiri-dev
+  post-upgrade: |
+    rc-service zacksiri-dev start
+  pre-upgrade: |
+    rc-service zacksiri-dev stop
+
+kits:
+  - description: static site server
+    main: true
+    name: web
+    ports:
+      - main: true
+        name: web
+        target: 3000
