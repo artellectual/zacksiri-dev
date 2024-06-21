@@ -332,7 +332,7 @@ What I want to highlight here is the `fit` part generates the `mean` and `standa
 
 ## Model Training
 
-This is the "learing" part of machine learning. In python you can simply pass your `Xt` the `x` training data and `Yt` y training data. Where x is the actual data and y in this case is the labels.
+This is the "learning" part of machine learning. In python you can simply pass your `Xt` the `x` training data and `Yt` y training data. Where x is the actual data and y in this case is the labels.
 
 ```python
 # python
