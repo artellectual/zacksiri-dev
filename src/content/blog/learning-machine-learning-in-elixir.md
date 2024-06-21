@@ -306,7 +306,7 @@ normalized =
   )
 ```
 
-The problem with the above aproach is it's quite verbose and also it's stateless which means if you want to get the `mean` and `standard_deviation` of a particular dataset you'll have to write that part as well. But it does give you the power to implement any kind of normalization technique you want.
+The problem with the above approach is it's quite verbose and also it's stateless which means if you want to get the `mean` and `standard_deviation` of a particular dataset you'll have to write that part as well. But it does give you the power to implement any kind of normalization technique you want.
 
 If you just want to normalize based on the standard methods, then I recommend using scholar.
 
