@@ -157,7 +157,7 @@ defmodule LinearRegression do
 end
 ```
 
-In elixir you can use for loops and `Enum.reduce` as well. However if you want to live in `defn` land an experience all the benefits of JIT compilation you'll have to use the `while` loop from elixir's Nx library. You can also get extra benefit by adding `unroll: true`. It will actually unroll your while loop as if you wrote out every iteration by hand. Be careful with unroll though, if you have a lot of iterations in your `range` like 10,000 using `unroll: true` can be a disastor 🧨😅. Believe be I've tried. Using something like `unroll: 2` would be more wise.
+In elixir you can use for loops and `Enum.reduce` as well. However if you want to live in `defn` land an experience all the benefits of JIT compilation you'll have to use the `while` loop from elixir's Nx library. You can also get extra benefit by adding `unroll: true`. It will actually unroll your while loop as if you wrote out every iteration by hand. Be careful with unroll though, if you have a lot of iterations in your `range` like 10,000 using `unroll: true` can be a disaster 🧨😅. Believe be I've tried. Using something like `unroll: 2` would be more wise.
 
 ## Axon
 
