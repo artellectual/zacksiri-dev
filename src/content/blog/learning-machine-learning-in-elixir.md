@@ -325,7 +325,7 @@ dataset =
 
 scaler = Scholar.Preprocessing.StandardScaler.fit(dataset)
 
-normalized = Scholar.Preprocessing.StandardScaler.fit(scaler, dataset)
+normalized = Scholar.Preprocessing.StandardScaler.transform(scaler, dataset)
 ```
 
 What I want to highlight here is the `fit` part generates the `mean` and `standard_deviation` for you based on the dataset you pass in. This will be necessary when you do inference after training the model. It's important to store this state somewhere. With scholar you can also simply use `Scholar.Preprocessing.StandardScaler.fit_transform(dataset)` if you are sure you won't need the scaler.
