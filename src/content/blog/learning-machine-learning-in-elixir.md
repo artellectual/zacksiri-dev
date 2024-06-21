@@ -84,7 +84,7 @@ Nx.shape(x)
 
 ```python
 # python
-w = np.array([[200, 100]])
+w = np.array([10])
 b = 5
 
 f_x = np.dot(w, X) + b
