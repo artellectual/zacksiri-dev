@@ -402,5 +402,6 @@ I hope that this post will help some people who are trying to get into machine l
 + [HN](https://news.ycombinator.com/item?id=40748064)
 + [X / Twitter](https://x.com/zacksiri/status/1804058552178479545)
 + [ElixirForum](https://elixirforum.com/t/blog-post-learning-machine-learning-in-elixir/64444)
++ [Reddit](https://www.reddit.com/r/elixir/comments/1dl0gay/learning_machine_learning_in_elixir/)
 
 If I made any mistakes I apologize in advance. Do feel free to reach out and let me know.
