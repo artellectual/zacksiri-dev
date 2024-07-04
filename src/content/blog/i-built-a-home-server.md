@@ -1,6 +1,6 @@
 ---
 title: I Built a Home Server
-pubDatetime: 2024-07-05T00:00:00Z
+pubDatetime: 2024-07-04T00:00:00Z
 slug: i-build-a-home-server
 description: My NAS broke down and I couldn't fix it and replacements are expensive, so I decided to build a home server to solve all my problems.
 tags:
