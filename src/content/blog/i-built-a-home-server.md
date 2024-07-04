@@ -193,7 +193,13 @@ I've been running this setup for about a month now. Overall I'm really happy wit
 
 Or I'll just login to livebook to try some experiment that came up. I've recently started running some test suites for some CI work on the machine. I'll write more about that on a different day. Everything feels fast and snappy. I don't have to wake up in the middle of the night wondering if I've turned of at GPU VM that's costing me some insane hourly rate.
 
-If you enjoyed this post be sure to like it on social media. If you are interested in learning more about how I use LXD to solve all my DevOps problems, spin up cloud platforms and deploy my apps [book a free consultation](https://cal.com/zacksiri/opsmaru-devops-as-a-service) with me. I developed [opsmaru](https://ospmaru.com) as a tool to enable businesses to quickly and securely deploy their applications on any cloud of their choice.
+If you enjoyed this post be sure to like it on social media. 
+
+- [HN Thread](https://news.ycombinator.com/item?id=40876860)
+- [X/Twitter](https://x.com/zacksiri/status/1808924891791642992)
+- [Reddit](https://www.reddit.com/r/selfhosted/comments/1dvd5ek/i_recently_built_my_own_home_server_nas_using_lxd/)
+
+If you are interested in learning more about how I use LXD to solve all my DevOps problems, spin up cloud platforms and deploy my apps [book a free consultation](https://cal.com/zacksiri/opsmaru-devops-as-a-service) with me. I developed [opsmaru](https://ospmaru.com) as a tool to enable businesses to quickly and securely deploy their applications on any cloud of their choice.
 
 ---
 
