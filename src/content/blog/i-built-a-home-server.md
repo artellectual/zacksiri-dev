@@ -1,6 +1,6 @@
 ---
 title: I Built a Home Server
-pubDatetime: 2024-06-06T00:00:00Z
+pubDatetime: 2024-07-05T00:00:00Z
 slug: i-build-a-home-server
 description: My NAS broke down and I couldn't fix it and replacements are expensive, so I decided to build a home server to solve all my problems.
 tags:
@@ -27,7 +27,7 @@ I read online and I saw people were paying up to 600 USD to get it fixed. I mana
 
 ## Held Captive
 
-I started going to local electronic shops here in Thailand to take a look to find if anyone could fix the mainboard. Funnily enough after doing some tests the shop told me every bit of the mainboard works. I was perplexed as to why it wouldn't turn on. After doing some further research online I found out there is [something wrong](https://forum.qnap.com/viewtopic.php?f=45&t=135089&start=150#p767546) with the LPC clock on the mainboard that's preventing it from turning on. Even the fix available is a temporary fix, unless you replace the entire motherboard along with the CPU.
+I took the NAS to local electronics / computer shops here in Thailand to take a look to find if anyone could fix the mainboard. Funnily enough after doing some tests the shop told me every bit of the mainboard works. I was perplexed as to why it wouldn't turn on. After doing some further research online I found out there is [something wrong](https://forum.qnap.com/viewtopic.php?f=45&t=135089&start=150#p767546) with the LPC clock on the mainboard that's preventing it from turning on. Even the fix available is a temporary fix, unless you replace the entire motherboard along with the CPU.
 
 The problem seems to have stemmed from a bug in the intel CPU that was used in my particular model of NAS. It was never rectified by the vendor and now the problem has been pushed onto the consumer.
 
@@ -174,6 +174,14 @@ Also for some reason the password I use for RDP now is the simple password I use
 ![windows rdp](@assets/images/i-built-a-home-server/windows-rdp.png)
 
 Now if I ever need to try / test anything on windows it's just a click away and I have Windows 11 running anywhere I want as long as I'm connected to tailnet.
+
+### CPU Cooler
+
+I chose DeepCool AK500 Digital for my cpu cooler. Mostly because of it's performance and I just love the way it looks. Fortunately there is a [python script](https://github.com/Algorithm0/deepcool-digital-info) that enables support on linux. At any point I can quickly glance over see how much load is on the system and the CPU temps.
+
+![cpu cooler](@assets/images/i-built-a-home-server/deep-cool.jpg)
+
+My kids love prancing into my studio to stare at the cpu cooler alternate between the numbers! 😝
 
 ## The Final Setup
 
