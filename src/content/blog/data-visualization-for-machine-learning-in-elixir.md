@@ -64,7 +64,7 @@ iris = DF.mutate(iris, [
   species: Explorer.Series.cast(species, :category)
 ])
 
-cols = ~w(sepal_width sepal_length petal_length petal_width)
+cols = ~w(sepal_length sepal_width petal_length petal_width)
 
 normalized_iris = 
   DF.mutate(
@@ -113,6 +113,29 @@ We can also customize the shapes and colors, for all the possible shapes and col
 ![sepal length and width](@assets/images/data-visualization-for-machine-learning-in-elixir/sepal-length-and-width.png)
 
 At this point one may be curious and ask whether it's possible to plot out all the possibilities for the 4 features. If we take 4 * 4 we would know there are actually 16 possibilities. We could plot each of them out one by one, but there is an easier way!
+
+## Facetted Scatter Plot
+
+We can also facet our plot based on the species.
+
+```elixir
+sepal_data = normalized_iris[["sepal_length", "sepal_width", "species"]]
+
+Vl.new(width: 640, height: 480)
+|> Vl.data_from_values(sepal_data)
+|> Vl.facet([field: "species"], 
+  Vl.new()
+  |> Vl.mark(:point, size: "120", filled: true)
+  |> Vl.encode_field(:x, "sepal_length", type: :quantitative, title: "sepal length", scale: %{zero: false})
+  |> Vl.encode_field(:y, "sepal_width", type: :quantitative, title: "sepal width", scale: %{zero: false})
+  |> Vl.encode_field(:shape, "species", type: :nominal, scale: %{range: ["circle", "cross", "square"]})
+  |> Vl.encode_field(:color, "species", type: :nominal, scale: %{range: ["blue", "red", "green"]})
+)
+```
+
+Using the `Vl.facet/3` you can split out the plot based on the species. The output will look like the following:
+
+![facet scatter plot](@assets/images/data-visualization-for-machine-learning-in-elixir/facet-scatter-plot.png)
 
 ## Multiple Scatter Plot
 
@@ -385,6 +408,8 @@ Notice we're not passing in any data into the chart, we're simply initializing i
 Let's tweak our loop and run it:
 
 ```elixir
+initial_state = Axon.ModelState.new(%{})
+
 loop =
   loop
   |> Axon.Loop.handle_event(:epoch_completed, metadata_plotter)
@@ -399,9 +424,11 @@ You should see the data being plotted in real-time. For long running training ta
 
 ## Axon's Native Plotter
 
-Axon also has a [built in plotter](https://hexdocs.pm/axon/Axon.Loop.html#kino_vega_lite_plot/4) if you just want the loss / accuracy curve this is probably the best way to go. It plots every step, which means the output is even more finegrained than plotting after every epoch. However I still think it's good to know how it works under the hood incase you want to monitor metrics or customize the plot like for example plotting the accuracy and loss in a single chart. To use the Axon plotter you can try something like this:
+Axon also has a [built in plotter](https://hexdocs.pm/axon/Axon.Loop.html#kino_vega_lite_plot/4) if you just want the loss / accuracy curve this is probably the best way to go. It plots every step, which means the output is even more fine grained than plotting after every epoch. However I still think it's good to know how it works under the hood incase you want to monitor metrics or customize the plot like for example plotting the accuracy and loss in a single chart. To use the Axon plotter you can try something like this:
 
 ```elixir
+initial_state = Axon.ModelState.new(%{})
+
 plot =
   Vl.new(width: 640, height: 480)
   |> Vl.mark(:line)
@@ -422,15 +449,19 @@ loop =
 
 ## Closing Thoughts
 
+In this post we looked at scatter plots for the dataset both with single feature pair and a combination of all the feature pairs. We also looked at plotting out the metrics of the model training process. We dug deeper into the inner workings of Axon to figure out how we can modify the output and also plot the loss and accuracy of the training process.
+
 There is a lot more to explore when it comes to the data tooling in Elixir's machine learning ecosystem. For example there is a very nice library called `:tucan` which is a wrapper ontop of `:vega_lite` and provides a higher level of abstraction to make it easier to visualize data.
 
-In this post we only covered plotting the dataset and the training metrics like `loss` and `accuracy`. We still haven't gone into deeper model inspection metrics like evalutating our model against a test set and comparing the accuracy. We can also look at evaluating multiple models to find out which model returns the best results. There are also metrics like `recall` and `precision` and plotting out the confusion matrix. As I delve deeper into the ecosystem I'll be sure to share more.
+We still haven't gone into deeper model inspection metrics like evalutating our model against a test set and comparing the accuracy. Imagine we were not sure which parameters would yield the best result and we wanted to create multiple models and compare the results between them. There are also metrics like `recall` and `precision` and plotting out the `confusion matrix`. As I delve deeper into the ecosystem I'll be sure to share more.
 
 If you like this post and would like to learn more you can support me by buying me coffee.
 
 <a href="https://www.buymeacoffee.com/zacksiri" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
-Also checkout my DevOps [product](https://opsmaru.com). I've helped businesses setup deployment pipelines on a cloud provider of their choice with best practices with very quick turnaround. If you're interested in learning more you can [book a call](https://cal.com/zacksiri/opsmaru-devops-as-a-service) with me.
+---
+
+Also checkout my DevOps [product](https://opsmaru.com). I've helped businesses setup deployment pipelines, cut cloud and operational spending with best practices with very quick turnaround. If you're interested in learning more you can [book a call](https://cal.com/zacksiri/opsmaru-devops-as-a-service) with me.
 
 
 
