@@ -145,7 +145,7 @@ To integrate LLMs into my system, I store prompts either in the database or dire
 
 This approach ensures flexibility and reusability, enabling efficient interaction with LLMs tailored to various scenarios.
 
-![Prompt templating](@assets/images/llms-a-ghost-in-the-machine/prompt-templating.png)
+![Prompt templating](@assets/images/llms-a-ghost-in-the-machine/prompt-construction.png)
 
 Here is an elixir example using the `:solid`  library to render prompts dynamically.
 
