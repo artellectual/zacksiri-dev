@@ -9,6 +9,7 @@ tags:
  - agentic
  - ai
  - stigmergy
+ - promptengineering
 author: Zack Siri
 featured: true
 ---
