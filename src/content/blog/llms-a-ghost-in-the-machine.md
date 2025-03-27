@@ -13,6 +13,8 @@ author: Zack Siri
 featured: true
 ---
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/51_kEVZmzB8?si=Rp8X6DKfiWp5jRuc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 The landscape of Large Language Models (LLMs) is evolving rapidly, with powerful and open models being released at an unprecedented pace. As these technologies advance, so does the potential to integrate them into our existing systems. Traditionally, we've built systems with distinct layers such as the Application layer and Data Persistence layer.
 
 In this post, I'll guide you through the process of integrating LLMs into your systems. Having recently embarked on building my first LLM-native system, I'm excited to share some practical methods for incorporating these models into your workflows.
