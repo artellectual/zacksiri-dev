@@ -6,8 +6,9 @@ description: The landscape of Large Language Models (LLMs) is evolving rapidly, 
 tags:
  - llm
  - software
+ - agentic
  - ai
- - integration
+ - stigmergy
 author: Zack Siri
 featured: true
 ---
@@ -25,4 +26,17 @@ By the end of this video, you'll have a clear understanding of how to:
 Let's dive in and explore the future of intelligent, language-driven systems together!
 
 For the following post I will be using [﻿TMDB OpenAPI](https://developer.themoviedb.org/openapi) as a case study.
+
+## Integrating LLMs into System Architecture
+
+Imagine having a powerful assistant embedded within your system, ready to tackle tasks on demand. That's the potential of integrating Large Language Models (LLMs) into your systems. With LLMs, you can offload real-time jobs without needing to program each behavior explicitly.
+
+Traditionally, system behaviors are hard-coded and tailored to specific business problems. However, LLMs offer an opportunity to build more versatile and adaptive systems. By combining the deterministic nature of traditional programming with the probabilistic power of LLMs, developers can create hybrid systems that:
+
+1. **Adapt** to new challenges.
+2. **Generalize** solutions across various problem sets.
+3. **Leverage** real-time language processing capabilities.
+This approach doesn't replace traditional programming but enhances it, enabling your systems to be more intelligent and flexible.
+
+
 
