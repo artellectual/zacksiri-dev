@@ -1,6 +1,6 @@
 ---
 title: LLMs - A Ghost in the Machine
-pubDatetime: 2025-03-28T00:00:00Z
+pubDatetime: 2025-03-27T00:00:00Z
 slug: llms-a-ghost-in-the-machine
 description: The landscape of Large Language Models (LLMs) is evolving rapidly, with powerful and open models being released at an unprecedented pace. As these technologies advance, so does the potential to integrate them into our existing systems. Traditionally, we've built systems with distinct layers such as the Application layer and Data Persistence layer.
 tags:
