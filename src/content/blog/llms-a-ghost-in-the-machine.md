@@ -4,17 +4,19 @@ pubDatetime: 2025-03-27T00:00:00Z
 slug: llms-a-ghost-in-the-machine
 description: The landscape of Large Language Models (LLMs) is evolving rapidly, with powerful and open models being released at an unprecedented pace. As these technologies advance, so does the potential to integrate them into our existing systems. Traditionally, we've built systems with distinct layers such as the Application layer and Data Persistence layer.
 tags:
- - llm
- - software
- - agentic
- - ai
- - stigmergy
- - promptengineering
+  - llm
+  - software
+  - agentic
+  - ai
+  - stigmergy
+  - promptengineering
 author: Zack Siri
 featured: true
 ---
 
-<iframe width="736" height="414" src="https://www.youtube.com/embed/51_kEVZmzB8?si=Rp8X6DKfiWp5jRuc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<div class="relative w-full" style="padding-bottom: 56.25%;">
+  <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/51_kEVZmzB8?si=Rp8X6DKfiWp5jRuc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
 
 The landscape of Large Language Models (LLMs) is evolving rapidly, with powerful and open models being released at an unprecedented pace. As these technologies advance, so does the potential to integrate them into our existing systems. Traditionally, we've built systems with distinct layers such as the Application layer and Data Persistence layer.
 
@@ -26,7 +28,7 @@ By the end of this video, you'll have a clear understanding of how to:
 2. **Select** the right LLM for your specific needs.
 3. **Integrate** LLMs with your current architecture seamlessly.
 4. **Leverage** the unique capabilities of LLMs to enhance your system's functionality.
-Let's dive in and explore the future of intelligent, language-driven systems together!
+   Let's dive in and explore the future of intelligent, language-driven systems together!
 
 For the following post I will be using [﻿TMDB OpenAPI](https://developer.themoviedb.org/openapi) as a case study.
 
@@ -115,10 +117,10 @@ I had this schema:
   },
   "title": "movie-changes",
   "type": "object"
-}  
+}
 ```
 
-The schema provided lacked a clear description, even though its structure was familiar. To address this, I leveraged a Large Language Model (LLM) to generate a descriptive summary. Here’s the result:
+The schema provided lacked a clear description, even though its structure was familiar. To address this, I leveraged a Large Language Model (LLM) to generate a descriptive summary. Here's the result:
 
 > A record of changes made to movie metadata, specifically related to images, including actions (added), timestamps, and details about the image files (like file paths).
 
@@ -141,7 +143,7 @@ It's not always perfect but I would say even if it gets it right 90% - 95% of th
 
 ## Prompt Templating
 
-To integrate LLMs into my system, I store prompts either in the database or directly in the code, depending on the specific use case. These prompts are designed as Liquid templates, allowing for dynamic content generation. Here’s how it works:
+To integrate LLMs into my system, I store prompts either in the database or directly in the code, depending on the specific use case. These prompts are designed as Liquid templates, allowing for dynamic content generation. Here's how it works:
 
 1. **Template Storage**: Prompts are saved as Liquid templates in either the database or the codebase.
 2. **Data Injection**: Relevant data from the database is injected into these templates.
@@ -152,7 +154,7 @@ This approach ensures flexibility and reusability, enabling efficient interactio
 
 ![Prompt templating](@assets/images/llms-a-ghost-in-the-machine/prompt-construction.png)
 
-Here is an elixir example using the `:solid`  library to render prompts dynamically.
+Here is an elixir example using the `:solid` library to render prompts dynamically.
 
 ```elixir
 @prompt
@@ -364,13 +366,12 @@ To ensure the results are useful and actionable, I used structured output format
       "/3/movie/{movie_id}/keywords",
       "/3/movie/{movie_id}"
     ]
-  },
+  }
   // ...redacted for brevity
 ]
 ```
 
 The results are impressive! I've experimented with multiple models— `**qwen2.5**`, `**gemma3**`, and `**mistral-small**` —and found that they all perform well. Ultimately, I chose to go with Gemma 3 12b for my needs.
-
 
 I'll be creating a follow-up content comparing the outputs of these models in more detail. Make sure to [subscribe to my channel](https://www.youtube.com/@devops-show) so you won't miss it!
 
@@ -446,10 +447,7 @@ Asking Gemma3 12b with structured output:
       "description": "Parameter name"
     }
   },
-  "required": [
-    "field",
-    "maps_to"
-  ],
+  "required": ["field", "maps_to"],
   "additionalProperties": false
 }
 ```
@@ -458,12 +456,12 @@ I got the following with zero-shot:
 
 ```json
 {
-  "field":"id",
-  "maps_to":"movie_id"
+  "field": "id",
+  "maps_to": "movie_id"
 }
 ```
 
-We can now use this output to dynamically make requests by retrieving the `id`  from the data and pass it as the `movie_id`  in our request.
+We can now use this output to dynamically make requests by retrieving the `id` from the data and pass it as the `movie_id` in our request.
 
 ## Working with Non-Determinism
 
@@ -482,6 +480,7 @@ we can create robust systems that leverage the power of LLMs while accounting fo
 ![Stigmergy](@assets/images/llms-a-ghost-in-the-machine/stigmergy.png)
 
 ### Operation Initiation
+
 To begin, you kick off the operation by first checking if there has been a previous case where the given endpoint was called with the specified parameters. If not, you leverage the LLM to map the fields and make the API call.
 
 ### Evaluation Loop
@@ -507,16 +506,3 @@ To achieve this, we:
 These incremental steps, though small individually, can number in the thousands within a given system. The potential of such a stigmergic system, when fully realized, is both fascinating and promising. It represents a new paradigm in system building – one that embraces the generative nature of LLMs to create reliable, organic digital systems.
 
 By adopting this approach, we shift from prescribing every detail to fostering adaptive growth, allowing our systems to evolve and improve continually.
-
-
-
-
-
-
-
-
-
-
-
-
-
