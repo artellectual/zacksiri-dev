@@ -3,11 +3,11 @@ title: Work distribution with Jump Consistent Hashing
 pubDatetime: 2023-06-06T00:00:00Z
 slug: work-distribution-with-jump-consistent-hash
 description: How you can use jump consistent hashing to distribute workload in a distributed system.
-tags: 
+tags:
   - development
   - distributed-computing
 author: Zack Siri
-featured: true
+featured: false
 ---
 
 # Work Distribution with Jump Consistent Hashing
@@ -18,7 +18,7 @@ On https://opsmaru.com, we run multiple (3) nodes to ensure high availability. T
 [:"instellar@instellar-staging-web-03", :"instellar@instellar-staging-web-02"]
 ```
 
-One of the problems that come with distributed computing is how do you ensure a job only runs once. If you use a job queue, the job library will have mechanics to guarantee your job runs once. Throwing everything into a job queue is one way of solving the problem, however given the nature of jobs queue __when__ the job runs is pretty non-deterministic. It's close to real-time if your job queue is empty, and it can sit and wait in a queue if your system is busy. This can lead to a few problems. Given that this is an elixir based application, coming up with a simple mechanic to ensure updates in the system happen in real-time should be trivial.
+One of the problems that come with distributed computing is how do you ensure a job only runs once. If you use a job queue, the job library will have mechanics to guarantee your job runs once. Throwing everything into a job queue is one way of solving the problem, however given the nature of jobs queue **when** the job runs is pretty non-deterministic. It's close to real-time if your job queue is empty, and it can sit and wait in a queue if your system is busy. This can lead to a few problems. Given that this is an elixir based application, coming up with a simple mechanic to ensure updates in the system happen in real-time should be trivial.
 
 ![installation example](@assets/images/work-distribution-with-jump-consistent-hash/installation-state-depends-on-instances.png)
 
@@ -52,7 +52,7 @@ defmodule Instellar.Deployments.Installation.Monitoring do
 
   @impl true
   def handle_info({:verify, %Instance{installation_id: installation_id}}, state) do
-    # code that will update the state of the 
+    # code that will update the state of the
     # transition based on the logic explained above
 
     Installation
@@ -112,7 +112,7 @@ iex(12)> Jumper.slot(7, 3)
 
 As you can see it returns the index of the node which we should assign a given task to. For the most part we can also see that it's evently distributing the workload across the 3 nodes. It's also worth noting that the same `installation_id` would go to the same node. So an `installation_id` of `7` will always be assigned to node `0`. This is great if you have stateful workload like downloading a file and processing again at a later time. In our case, our workload is stateless, so this isn't really an advantage, but having an evenly distributed workload is something we do want.
 
-Our key can also be a string, however we would need to use the `:erlang.phash2("something")` to first convert it into a hash integer before passing it into jumper. 
+Our key can also be a string, however we would need to use the `:erlang.phash2("something")` to first convert it into a hash integer before passing it into jumper.
 
 ```elixir
 "something"
@@ -127,7 +127,7 @@ Now we understand what a jump consistent hash is, how do we actually use this in
 ```elixir
 cluster = [Node.self() | Node.list()]
 
-index = 
+index =
   cluster
   |> Enum.sort()
   |> Enum.find_index(fn n -> n == Node.self() end)
@@ -178,7 +178,7 @@ def handle_info({:verify, %Instance{installation_id: installation_id}}, state) d
   else
     # do nothing
     {:noreply, state}
-  end 
+  end
 end
 
 defp maybe_compute_state(%__MODULE__{} = state) do
@@ -211,38 +211,35 @@ I want to have the latest state computed, but I also realize that we do not need
 
 ## End Result
 
- There are many ways one can solve such a problem, you could use something like `:swarm` where workers are created on a given event, run the job and then die off. This solution was simple to implement and worked really well and had very few dependencies. Overall I'm quite happy with the way things turned out. I get the real-time feeling of state changes and it looks really cool when you can see it in action in the UI.
+There are many ways one can solve such a problem, you could use something like `:swarm` where workers are created on a given event, run the job and then die off. This solution was simple to implement and worked really well and had very few dependencies. Overall I'm quite happy with the way things turned out. I get the real-time feeling of state changes and it looks really cool when you can see it in action in the UI.
 
- ![real time update](@assets/images/work-distribution-with-jump-consistent-hash/real-time-event-update-instellar.gif)
+![real time update](@assets/images/work-distribution-with-jump-consistent-hash/real-time-event-update-instellar.gif)
 
- ![log output](@assets/images/work-distribution-with-jump-consistent-hash/log-output.png)
+![log output](@assets/images/work-distribution-with-jump-consistent-hash/log-output.png)
 
- You can see from the log output that the work is evenly distributed across 3 nodes.
+You can see from the log output that the work is evenly distributed across 3 nodes.
 
- __Thank you for reading! If you need help with your distributed applications, elixir, go, ruby, typescript, nodejs or need help with DevOps / Deployment work, I'm available for consulting. Feel free to reach out to [me@zacksiri.dev](mailto:me@zacksiri.dev)__
+**Thank you for reading! If you need help with your distributed applications, elixir, go, ruby, typescript, nodejs or need help with DevOps / Deployment work, I'm available for consulting. Feel free to reach out to [me@zacksiri.dev](mailto:me@zacksiri.dev)**
 
- ## Bonus
+## Bonus
 
- In the example above I did the work of verifying the installation state right in the `GenServer` however in reality, there is another way we can make this more scalable. We can wrap the actual work load inside an async `Task` to achieve some sort of scalability. Since we only have 1 `Monitoring` worker on each node, it's smart to use it as a scheduler and delegate the actual work to an async `Task`. Here is an example how we can achieve this.
+In the example above I did the work of verifying the installation state right in the `GenServer` however in reality, there is another way we can make this more scalable. We can wrap the actual work load inside an async `Task` to achieve some sort of scalability. Since we only have 1 `Monitoring` worker on each node, it's smart to use it as a scheduler and delegate the actual work to an async `Task`. Here is an example how we can achieve this.
 
- ```elixir
- def handle_info({:verify, %Instance{installation_id: installation_id}}, state) do
-  state = maybe_compute_state(state)
+```elixir
+def handle_info({:verify, %Instance{installation_id: installation_id}}, state) do
+ state = maybe_compute_state(state)
 
-  if state.node_index == Jumper.slot(installation_id, Enum.count(state.size)) do
-    Task.Supervisor.async_nolink(Instellar.TaskSupervisor, fn -> 
-      # actual work is done here.
-    end)
+ if state.node_index == Jumper.slot(installation_id, Enum.count(state.size)) do
+   Task.Supervisor.async_nolink(Instellar.TaskSupervisor, fn ->
+     # actual work is done here.
+   end)
 
-    {:noreply, state}
-  else
-    # do nothing
-    {:noreply, state}
-  end 
+   {:noreply, state}
+ else
+   # do nothing
+   {:noreply, state}
+ end
 end
- ```
+```
 
- We use `Task.Supervisor.async_nolink` because should anything bad happen in the task it should not crash our `Monitoring` server. Since in this case the worker is just a scheduler it should not be impacted if something bad happens in the `Task`
-
-
-
+We use `Task.Supervisor.async_nolink` because should anything bad happen in the task it should not crash our `Monitoring` server. Since in this case the worker is just a scheduler it should not be impacted if something bad happens in the `Task`
