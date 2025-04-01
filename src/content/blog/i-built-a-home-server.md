@@ -10,7 +10,7 @@ tags:
   - gpu
   - machine-learning
 author: Zack Siri
-featured: true
+featured: false
 ---
 
 # How it Started
@@ -193,7 +193,7 @@ I've been running this setup for about a month now. Overall I'm really happy wit
 
 Or I'll just login to livebook to try some experiment that came up. I've recently started running some test suites for some CI work on the machine. I'll write more about that on a different day. Everything feels fast and snappy. I don't have to wake up in the middle of the night wondering if I've turned of at GPU VM that's costing me some insane hourly rate.
 
-If you enjoyed this post be sure to like it on social media. 
+If you enjoyed this post be sure to like it on social media.
 
 - [HN Thread](https://news.ycombinator.com/item?id=40876860)
 - [X/Twitter](https://x.com/zacksiri/status/1808924891791642992)

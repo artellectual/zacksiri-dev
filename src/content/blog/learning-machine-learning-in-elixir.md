@@ -11,7 +11,7 @@ tags:
   - nx
   - axon
 author: Zack Siri
-featured: true
+featured: false
 ---
 
 # Learning ML
@@ -399,9 +399,9 @@ Note that for experimentation using `Axon.predict/3` is enough. However for prod
 
 I hope that this post will help some people who are trying to get into machine learning with Elixir. There is a lot more to share than what's presented in this post. There is a whole topic with data visualization with `:vega_lite` and `kino` which I didn't touch on. I think those libraries deserve their own post, and I do plan on covering it in a future post. If you enjoyed this post do give me an upvote, like and a retweet.
 
-+ [HN](https://news.ycombinator.com/item?id=40748064)
-+ [X / Twitter](https://x.com/zacksiri/status/1804058552178479545)
-+ [ElixirForum](https://elixirforum.com/t/blog-post-learning-machine-learning-in-elixir/64444)
-+ [Reddit](https://www.reddit.com/r/elixir/comments/1dl0gay/learning_machine_learning_in_elixir/)
+- [HN](https://news.ycombinator.com/item?id=40748064)
+- [X / Twitter](https://x.com/zacksiri/status/1804058552178479545)
+- [ElixirForum](https://elixirforum.com/t/blog-post-learning-machine-learning-in-elixir/64444)
+- [Reddit](https://www.reddit.com/r/elixir/comments/1dl0gay/learning_machine_learning_in_elixir/)
 
 If I made any mistakes I apologize in advance. Do feel free to reach out and let me know.

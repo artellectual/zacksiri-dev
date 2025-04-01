@@ -11,7 +11,7 @@ tags:
   - axon
   - vega-lite
 author: Zack Siri
-featured: true
+featured: false
 ---
 
 # Rationale
@@ -66,11 +66,11 @@ iris = DF.mutate(iris, [
 
 cols = ~w(sepal_length sepal_width petal_length petal_width)
 
-normalized_iris = 
+normalized_iris =
   DF.mutate(
-    iris, 
+    iris,
     for col <- across(^cols) do
-      {col.name, (col - mean(col)) / variance(col)}  
+      {col.name, (col - mean(col)) / variance(col)}
     end
   )
 ```
@@ -112,7 +112,7 @@ We can also customize the shapes and colors, for all the possible shapes and col
 
 ![sepal length and width](@assets/images/data-visualization-for-machine-learning-in-elixir/sepal-length-and-width.png)
 
-At this point one may be curious and ask whether it's possible to plot out all the possibilities for the 4 features. If we take 4 * 4 we would know there are actually 16 possibilities. We could plot each of them out one by one, but there is an easier way!
+At this point one may be curious and ask whether it's possible to plot out all the possibilities for the 4 features. If we take 4 \* 4 we would know there are actually 16 possibilities. We could plot each of them out one by one, but there is an easier way!
 
 ## Facetted Scatter Plot
 
@@ -123,7 +123,7 @@ sepal_data = normalized_iris[["sepal_length", "sepal_width", "species"]]
 
 Vl.new(width: 640, height: 480)
 |> Vl.data_from_values(sepal_data)
-|> Vl.facet([field: "species"], 
+|> Vl.facet([field: "species"],
   Vl.new()
   |> Vl.mark(:point, size: "120", filled: true)
   |> Vl.encode_field(:x, "sepal_length", type: :quantitative, title: "sepal length", scale: %{zero: false})
@@ -188,15 +188,15 @@ feature_columns = [
   "petal_width"
 ]
 
-x_train = Nx.stack(normalized_iris[feature_columns], axis: -1) 
+x_train = Nx.stack(normalized_iris[feature_columns], axis: -1)
 
-y_train = 
+y_train =
   normalized_iris["species"]
   |> Nx.stack(axis: -1)
   |> Nx.equal(Nx.iota({1, 3}, axis: -1))
 
-data_stream = Stream.repeatedly(fn -> 
-  {x_train, y_train}  
+data_stream = Stream.repeatedly(fn ->
+  {x_train, y_train}
 end)
 
 model =
@@ -226,14 +226,14 @@ By default the loop will simply output the trained state of the model. The train
 We will tweak the output of the loop:
 
 ```elixir
-output = fn state -> 
+output = fn state ->
   %{trained_state: state.step_state.model_state, metadata: state.handler_metadata}
 end
 
 loop = %{loop | output_transform: output}
 ```
 
-We've replaced the default `output_transform` with our own map. This will give us the `:trained_state` and the `:metadata`. By default the `state` parameter is a [struct](https://hexdocs.pm/axon/Axon.Loop.State.html) that looks like the following: 
+We've replaced the default `output_transform` with our own map. This will give us the `:trained_state` and the `:metadata`. By default the `state` parameter is a [struct](https://hexdocs.pm/axon/Axon.Loop.State.html) that looks like the following:
 
 ```elixir
 %Axon.Loop.State{
@@ -269,7 +269,7 @@ In our case the `:epoch_completed` will be the perfect place to collect the loss
 
 ```elixir
 metadata_collector = fn state ->
-  # Things we want to collect  
+  # Things we want to collect
   epoch = state.epoch
   loss = Nx.to_number(state.step_state.loss)
   accuracy = Nx.to_number(state.metrics["accuracy"])
@@ -283,11 +283,11 @@ metadata_collector = fn state ->
 
   # here we update the :handler_metadata with our own map
   state = Map.put(state, :handler_metadata, %{
-    loss_history: loss_history ++ [loss], 
+    loss_history: loss_history ++ [loss],
     accuracy_history: accuracy_history ++ [accuracy],
     epoch_index: epoch_index ++ [epoch]
   })
-  
+
   # return the state
   {:continue, state}
 end
@@ -302,7 +302,7 @@ Now that we've got everything we need let's run the training loop. Since our dat
 ```elixir
 initial_state = Axon.ModelState.new(%{})
 
-output_state = 
+output_state =
   Axon.Loop.run(loop, data_stream, initial_state, iterations: 300, epochs: 20)
 ```
 
@@ -355,7 +355,7 @@ The `interpolate` option is customizable. You can customize it based on these va
 We can also plot the accuracy on the same chart. Let's do a multi layer plot. We'll split the plot into 2 yaers the `loss_layer` and the `accuracy_layer`.
 
 ```elixir
-loss_layer = 
+loss_layer =
   Vl.new()
   |> Vl.mark(:line, color: "red", interpolate: "natural")
   |> Vl.encode_field(:x, "epoch_index", type: :quantitative, title: "Epoch")
@@ -384,7 +384,7 @@ In this next part we will combine what we learned in the previous section of tur
 
 ```elixir
 # initialize the chart
-chart = 
+chart =
   Vl.new(width: 640, height: 480)
   |> Vl.mark(:line, color: "red", interpolate: "natural")
   |> Vl.encode_field(:x, "epoch", type: :quantitative, title: "Epoch")
@@ -393,12 +393,12 @@ chart =
 
 Kino.render(chart)
 
-metadata_plotter = fn state ->  
+metadata_plotter = fn state ->
   Kino.VegaLite.push(chart, %{
-    "epoch" => state.epoch, 
+    "epoch" => state.epoch,
     "loss" => Nx.to_number(state.step_state.loss)
   })
-  
+
   {:continue, state}
 end
 ```
@@ -414,7 +414,7 @@ loop =
   loop
   |> Axon.Loop.handle_event(:epoch_completed, metadata_plotter)
 
-output_state_2 = 
+output_state_2 =
   Axon.Loop.run(loop, data_stream, initial_state, iterations: 300, epochs: 20)
 ```
 
@@ -437,10 +437,10 @@ plot =
   |> Kino.VegaLite.new()
   |> Kino.render()
 
-loop = 
+loop =
   model
   |> Axon.Loop.trainer(loss, optimizer)
-  |> Axon.Loop.metric(:accuracy)  
+  |> Axon.Loop.metric(:accuracy)
   |> Axon.Loop.kino_vega_lite_plot(plot, "accuracy") # swap to loss if you want the loss curve
   |> Axon.Loop.run(data_stream, initial_state, iterations: 500, epochs: 10)
 ```
@@ -462,7 +462,3 @@ If you like this post and would like to learn more you can support me by buying 
 ---
 
 Also checkout my DevOps [product](https://opsmaru.com). I've helped businesses setup deployment pipelines, cut cloud and operational spending with best practices with very quick turnaround. If you're interested in learning more you can [book a call](https://cal.com/zacksiri/opsmaru-devops-as-a-service) with me.
-
-
-
-
