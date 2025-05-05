@@ -3,12 +3,12 @@ title: Self provisioning Ecto based Application
 pubDatetime: 2023-10-27T00:00:00Z
 slug: self-provisioning-ecto-based-application
 description: How an elixir application that uses ecto can bootstrap it's own database.
-tags: 
+tags:
   - development
   - elixir
   - ecto
 author: Zack Siri
-featured: true
+featured: false
 ---
 
 # Self provisioning Ecto based Application
@@ -55,7 +55,6 @@ end
 ```
 
 The `Uplink.Data` module is pretty straight forward. It's just a supervisor that wraps `Uplink.Repo` and any other services that depend on having the database working.
-
 
 ## Database Provisioning
 
@@ -161,7 +160,7 @@ As you can see it's just the standard default postgresql connection string used 
 
 We will be using `Postgrex` to make queries to the database to see if it's available for service. We do this with the `Postgrex.query(conn, "SELECT 1", [])`
 
-The final module: 
+The final module:
 
 ```elixir
 defmodule Uplink.Data.Provisioner do
@@ -293,10 +292,3 @@ Though this is not a typical use-case for setting up an application database for
 If you come from a docker / kubernetes background you would probably think it's crazy to run postgresql inside your application container. LXD is abit different, they are system containers which means it lends itself to such solutions. There is also another safety mechanism built into uplink which is that if the container is deleted and a new uplink container is brought up, it calls 'the mothership' via and api to re-saturates it's state.
 
 Lite mode is designed to be easy to get up and running, however running a local postgresql database also means we can only run a single copy of uplink in the cluster. For most customers this should be ok but for customers who have more intense requirement, when they need high availability load balancing we have the `pro` mode. It enables the use of an external database which means we can spawn multiple instances of uplink for those who need it.
-
-
-
-
-
-
-
