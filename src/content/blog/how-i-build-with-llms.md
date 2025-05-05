@@ -243,4 +243,4 @@ The patterns and techniques used in this project felt remarkably intuitive, larg
 
 Key to this ease of development were components like `Phoenix.PubSub`, `Plug`, `Req`, and `Agent`. For instance, using an `Agent` to buffer streaming output, can be implemented with just a few lines of code. This, combined with Elixir's comprehensive tooling, makes building and maintaining LLM powered applications remarkably straightforward, allowing clear and logical reasoning about the application’s structure and behavior.
 
-If you are curious to learn more or would like to ask me questions feel free to join [my discord](https://discord.gg/RgZZxcGF). I've also drawn a diagram that you can access to see how the [entire flow coming together](https://app.eraser.io/workspace/3nkX8mUbiLlfJKqsdoeA?origin=share).
+If you are curious to learn more or would like to ask me questions feel free to join [my discord](https://discord.gg/RgZZxcGF). I've also drawn a diagram that you can access to see how the [entire flow comes together](https://app.eraser.io/workspace/3nkX8mUbiLlfJKqsdoeA?origin=share).
