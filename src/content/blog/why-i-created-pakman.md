@@ -3,12 +3,12 @@ title: Why I created the PAKman Build System
 pubDatetime: 2023-05-16T00:00:00Z
 slug: why-i-created-pakman
 description: Why I created PAKman a build system based on Alpine packages using Elixir programming language.
-tags: 
+tags:
   - development
   - infrastructure
   - opsmaru
 author: Zack Siri
-featured: true
+featured: false
 ---
 
 # Why I created the PAKman Build System
@@ -66,4 +66,3 @@ The final built artifact that gets shipped over the wire for this NextJS blog we
 ![built artifact](@assets/images/why-i-created-pakman/built-artifact.png)
 
 Welcome to the future!
-
