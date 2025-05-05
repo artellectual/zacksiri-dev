@@ -14,7 +14,7 @@ author: Zack Siri
 featured: true
 ---
 
-Building things with Large Language Models (LLMs) can feel complex, and I recently found myself navigating that complexity firsthand. I've been developing a new project, and through that experience, I've uncovered some really helpful patterns and techniques. In this post, I want to share those learnings with you, focusing on the key components and how they fit together. Details about the specific project are still coming soon, but the insights I’ll be sharing are broadly applicable to anyone looking to build LLM-powered applications. Let’s dive into what I’ve learned!
+Building things with Large Language Models (LLMs) can feel complex, and I recently found myself navigating that complexity firsthand. I've been developing a new LLM powered project, and through that experience, I've uncovered some really helpful patterns and techniques. In this post, I want to share those learnings with you, focusing on the key components and how they fit together. Details about the specific project are still coming soon, but the insights I’ll be sharing are broadly applicable to anyone looking to build LLM-powered applications. Let’s dive into what I’ve learned!
 
 ## Open WebUI
 
@@ -76,7 +76,7 @@ Once you add the adapter to your Open WebUI instance you can apply it by adding 
 
 ![Adding Connections](@assets/images/how-i-build-with-llms/open-web-ui-connection.png)
 
-Once you added the connection, you will also need to add a model name.
+Once you added the connection, you will also need to add a model name. If you're curious about what I'm using for the url it's simply a tailscale url. I can expose my dev server on `localhost:4000` over my tailnet by running `tailscale serve localhost:4000`
 
 ![Add Model](@assets/images/how-i-build-with-llms/add-model.png)
 
@@ -239,8 +239,8 @@ This should be able to parse streaming message from any LLM using OpenAI compati
 
 ## The Power of Elixir
 
-The patterns and techniques used in this project felt remarkably intuitive, largely thanks to Elixir's inherent concurrency model. Elixir's ability to handle numerous concurrent connections allows developers to maintain open connections without concern for resource limitations – a significant advantage for LLM powered applications. Phoenix, leveraging websockets through LiveView, already demonstrates this capability.
+The patterns and techniques used in this project felt remarkably intuitive, largely thanks to Elixir's inherent concurrency model. Elixir's ability to handle numerous concurrent connections allows developers to maintain open connections without concern for resource limitations – a significant advantage for LLM powered applications. Phoenix, leveraging websockets through LiveView, already demonstrates this natural capability.
 
-Key to this ease of development were components like `Plug`, `Req`, and `Agent`. For instance, using an `Agent` to buffer streaming output, can be implemented with just a few lines of code. This, combined with Elixir's comprehensive tooling, makes building and maintaining LLM powered applications remarkably straightforward, allowing clear and logical reasoning about the application’s structure and behavior.
+Key to this ease of development were components like `Phoenix.PubSub`, `Plug`, `Req`, and `Agent`. For instance, using an `Agent` to buffer streaming output, can be implemented with just a few lines of code. This, combined with Elixir's comprehensive tooling, makes building and maintaining LLM powered applications remarkably straightforward, allowing clear and logical reasoning about the application’s structure and behavior.
 
 If you are curious to learn more or would like to ask me questions feel free to join [my discord](https://discord.gg/RgZZxcGF). I've also drawn a diagram that you can access to see how the [entire flow coming together](https://app.eraser.io/workspace/3nkX8mUbiLlfJKqsdoeA?origin=share).
