@@ -14,6 +14,10 @@ author: Zack Siri
 featured: true
 ---
 
+<div class="relative w-full" style="padding-bottom: 56.25%;">
+  <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/8MLK1-8wLrU?si=PGzKssTPvnZZQofy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
 Building things with Large Language Models (LLMs) can feel complex, and I recently found myself navigating that complexity firsthand. I've been developing a new LLM powered project, and through that experience, I've uncovered some really helpful patterns and techniques. In this post, I want to share those learnings with you, focusing on the key components and how they fit together. Details about the specific project are still coming soon, but the insights I’ll be sharing are broadly applicable to anyone looking to build LLM-powered applications. Let’s dive into what I’ve learned!
 
 ## Open WebUI
