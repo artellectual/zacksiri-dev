@@ -3,24 +3,15 @@ layout: ../layouts/AboutLayout.astro
 title: "About"
 ---
 
-
-Hey, my name is Zack Siri, I'm currently working on [opsmaru.com](https://opsmaru.com). OpsMaru provides developers with the tools that make it easy to build their own PaaS on their infrastructure.
-
-I believe it's important that developers have the choice and control over their own infrastructure. It's important that developers don't have to choose between an easy but expensive or cheap but requires effort to manage. OpsMaru bridges this gap and makes it easy to run your own self-service Platform as a Service.
-
+Hey, my name is Zack Siri, I'm currently working on a Digital Assistant Framework / Runtime. This engine will provide developers / companies with tools to build next generation conversational AI applications.
 
 ## Goals
 
-The ability to turn your servers into serverless in a matter of minutes will bring about new ways of doing computing to the world. Imagine the following:
+- Generalized engine that allows developers to build any kind of digital assistant even orchestrate multiple assistants together.
+- Production grade security. The engine will allow fine-grained control over access to data and resources.
+- Model Agnosticism. The engine will support a wide range of models, allowing developers to choose the best fit for their use case.
+- Layered Thinking Architecture. I believe intelligence is not a single layer but a complex system of layers that work together to achieve a goal.
+  - Developers will be able to use this engine to orchestrate complex workflows and build intelligent applications.
+- Declarative Programming. The engine will support a declarative programming model, allowing developers to define the behavior of their applications in a declarative manner.
 
-- Being able to run your own AI model on your own servers and keeping the costs low.
-- Launching a new startup on a cheap VPS without having to worry about managing servers.
-- Enabling your team to focus on shipping features without worrying about the DevOps work.
-- Being able to sell your excess compute on a marketplace.
-- Being able to rent compute you don't have from other individuals, not a giant corporation.
-- Being able to sell your opensource software without having to build any infrastructure.
-
-
-Yes I'm talking about the next big shift in computing.
-
-When we drive our car to get to our destination, we don't think about the road. We know it's there, we know when we need to cross the river there is a bridge there to support us. We focus on getting to our destination without worrying about the infrastructure between us and our destination. That's what I believe software infrastructure should be, seamless and invisible to our experience.
+If you are interested in learning more about what I'm working on feel free to reach out on X / Twitter [@zacksiri](https://x.com/zacksiri)
