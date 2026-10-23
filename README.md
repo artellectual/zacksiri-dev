@@ -18,6 +18,27 @@ npm ci
 npm run build
 ```
 
+## Dependency maintenance
+
+This update retains Astro 4, React 18, and Tailwind CSS 3. Moving to current
+framework majors is a separate migration, not a routine lockfile update.
+`@astrojs/sitemap` is pinned to `3.2.1`: newer releases use a build-routes API
+that is incompatible with this Astro 4 build.
+
+After updating dependencies, validate with:
+
+```sh
+mise exec -- npm ci
+mise exec -- npm run lint
+mise exec -- npm run build
+mise exec -- npm run deploy:dry-run
+mise exec -- npm audit
+```
+
+An `npm audit` failure should be reviewed separately from build success. Some
+remaining advisories require framework/toolchain migrations; do not use
+`npm audit fix --force` to apply unreviewed breaking upgrades or downgrades.
+
 ## Deployment
 
 ### Current hosting
