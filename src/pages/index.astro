@@ -42,8 +42,11 @@ const socialCount = SOCIALS.filter(social => social.active).length;
       </a>
 
       <p>
-        Welcome to my development / engineering blog. I make software using Elixir / Phoenix. I'm currently focused on building <a href="https://opsmaru.com">opsmaru.com</a>.
-        This blog is a collection of things I learned building projects over the years.
+        Welcome to my development / engineering blog. I make software using
+        Elixir / Phoenix. I'm currently focused on building <a
+          href="https://opsmaru.com">opsmaru.com</a
+        >. This blog is a collection of things I learned building projects over
+        the years.
       </p>
       {
         // only display if at least one social link is enabled
@@ -64,9 +67,9 @@ const socialCount = SOCIALS.filter(social => social.active).length;
           <section id="featured">
             <h2>Featured</h2>
             <ul>
-              {featuredPosts.map(({ data, slug }) => (
+              {featuredPosts.map(({ data, id }) => (
                 <Card
-                  href={`/posts/${slug}/`}
+                  href={`/posts/${id}/`}
                   frontmatter={data}
                   secHeading={false}
                 />
@@ -84,10 +87,10 @@ const socialCount = SOCIALS.filter(social => social.active).length;
           <h2>Recent Posts</h2>
           <ul>
             {recentPosts.map(
-              ({ data, slug }, index) =>
+              ({ data, id }, index) =>
                 index < 4 && (
                   <Card
-                    href={`/posts/${slug}/`}
+                    href={`/posts/${id}/`}
                     frontmatter={data}
                     secHeading={false}
                   />

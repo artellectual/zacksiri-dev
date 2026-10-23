@@ -20,10 +20,19 @@ npm run build
 
 ## Dependency maintenance
 
-This update retains Astro 4, React 18, and Tailwind CSS 3. Moving to current
-framework majors is a separate migration, not a routine lockfile update.
-`@astrojs/sitemap` is pinned to `3.2.1`: newer releases use a build-routes API
-that is incompatible with this Astro 4 build.
+The site uses Astro 7 with React 18 and Tailwind CSS 3. Blog collections are
+defined in `src/content.config.ts` with the Content Layer glob loader. Existing
+frontmatter `slug` values become entry IDs, preserving published post URLs.
+
+`astro.config.ts` explicitly keeps the unified Markdown processor and the existing
+remark plugins. Tailwind runs through Vite's PostCSS configuration instead of the
+incompatible `@astrojs/tailwind` integration. React 19 and Tailwind 4 are separate
+migrations, not requirements for this Astro upgrade.
+
+The scoped `@vitejs/plugin-react` override in `package.json` is intentional:
+`@astrojs/react@7.1.1` requires `oxc-transform-react@^0.145.0`, but plugin-react
+`6.1.2` requires `^0.152.0`. Pinning the plugin to `6.1.1` keeps the peer versions
+compatible. Recheck these upstream requirements before removing the override.
 
 After updating dependencies, validate with:
 
@@ -31,9 +40,13 @@ After updating dependencies, validate with:
 mise exec -- npm ci
 mise exec -- npm run lint
 mise exec -- npm run build
+mise exec -- npm test
 mise exec -- npm run deploy:dry-run
 mise exec -- npm audit
 ```
+
+`npm test` checks the existing build output: published URLs, RSS/sitemap links,
+social images, removed video embeds, redirects, and compiled styles. Build first.
 
 An `npm audit` failure should be reviewed separately from build success. Some
 remaining advisories require framework/toolchain migrations; do not use
