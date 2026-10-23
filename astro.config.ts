@@ -1,40 +1,43 @@
 import { defineConfig } from "astro/config";
-import tailwind from "@astrojs/tailwind";
+import { unified } from "@astrojs/markdown-remark";
 import react from "@astrojs/react";
+import sitemap from "@astrojs/sitemap";
+import autoprefixer from "autoprefixer";
+import tailwindcss from "tailwindcss";
 import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
-import sitemap from "@astrojs/sitemap";
 import { SITE } from "./src/config";
 
-// https://astro.build/config
 export default defineConfig({
-  redirects: {
-    '/posts/work-distribution-with-jump-consistent-hashing': '/posts/work-distribution-with-jump-consistent-hash'
-  },
   site: SITE.website,
-  integrations: [
-    tailwind({
-      applyBaseStyles: false,
-    }),
-    react(),
-    sitemap(),
-  ],
+  output: "static",
+  // Preserve HTML whitespace behavior from Astro 4.
+  compressHTML: true,
+  redirects: {
+    "/posts/work-distribution-with-jump-consistent-hashing":
+      "/posts/work-distribution-with-jump-consistent-hash",
+  },
+  integrations: [react(), sitemap()],
   markdown: {
-    remarkPlugins: [
-      remarkToc,
-      [
-        remarkCollapse,
-        {
-          test: "Table of contents",
-        },
+    // Keep the existing TOC/collapse plugins instead of changing Markdown engines.
+    processor: unified({
+      remarkPlugins: [
+        remarkToc,
+        [remarkCollapse, { test: "Table of contents" }],
       ],
-    ],
+    }),
     shikiConfig: {
       theme: "dracula",
       wrap: true,
     },
   },
   vite: {
+    css: {
+      // @astrojs/tailwind does not support Astro 7. Retain Tailwind 3 directly.
+      postcss: {
+        plugins: [tailwindcss(), autoprefixer()],
+      },
+    },
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"],
     },
