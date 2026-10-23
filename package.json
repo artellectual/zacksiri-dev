@@ -1,6 +1,9 @@
 {
   "name": "zacksiri-dev",
   "version": "4.2.0",
+  "engines": {
+    "node": "^24.22.1"
+  },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
