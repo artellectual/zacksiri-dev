@@ -1,0 +1,3 @@
+# Preserve the old post URL with a permanent HTTP redirect on Cloudflare.
+/posts/work-distribution-with-jump-consistent-hashing /posts/work-distribution-with-jump-consistent-hash/ 301
+/posts/work-distribution-with-jump-consistent-hashing/ /posts/work-distribution-with-jump-consistent-hash/ 301
