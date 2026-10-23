@@ -9,6 +9,9 @@
     "start": "astro dev",
     "build": "astro check && astro build && jampack ./dist",
     "preview": "astro preview",
+    "preview:cloudflare": "wrangler dev --local",
+    "deploy": "wrangler deploy",
+    "deploy:dry-run": "wrangler deploy --dry-run",
     "sync": "astro sync",
     "astro": "astro",
     "format:check": "prettier --check . --plugin=prettier-plugin-astro",
@@ -50,7 +53,8 @@
     "prettier-plugin-astro": "^0.13.0",
     "prettier-plugin-tailwindcss": "^0.5.11",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "wrangler": "4.152.0"
   },
   "config": {
     "commitizen": {
