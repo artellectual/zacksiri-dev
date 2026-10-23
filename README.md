@@ -54,18 +54,16 @@ remaining advisories require framework/toolchain migrations; do not use
 
 ## Deployment
 
-### Current hosting
-
-The existing GitHub Actions workflow deploys to [OpsMaru](https://opsmaru.com).
-It remains unchanged until the Cloudflare migration is complete.
+This repository is configured for Cloudflare Workers Builds. No Alpine packaging
+pipeline or Caddy server is required.
 
 ### Cloudflare Workers
 
 `wrangler.jsonc` configures the `zacksiri-dev` Worker to serve `dist/` as static
 assets. There is no Worker script, backend, or Astro server adapter. Unknown
 paths return the site's `404.html` with a 404 status, and `public/_redirects`
-preserves the old jump-consistent-hashing post URL with an HTTP 301. Astro's
-existing redirect is retained as a fallback for the current host.
+preserves the old jump-consistent-hashing post URL with an HTTP 301. Astro also
+generates an HTML redirect as a fallback.
 
 Wrangler is pinned in `package.json` and installed by `npm ci`. To validate the
 built site without deploying:
@@ -109,9 +107,10 @@ Under **Settings > Build > Build Variables and Secrets**, remove any stale
 `NODE_VERSION` override or set it to `24.22.1` so it matches `.node-version`.
 Check the next build log to confirm the selected Node.js version.
 
-Merge these changes from `develop` into `master` before connecting production
-builds. Connect the repository to the Worker, then verify the deployed
+Use Git Flow to release changes from `develop` into `master`, which Workers Builds
+uses for production. Preview builds use `npx wrangler preview` and can be enabled
+for development branches.
+
+When first connecting the repository to the Worker, verify the deployed
 `workers.dev` URL before attaching `zacksiri.dev` under **Settings > Domains &
 Routes**. No custom domain or DNS changes are made by the current configuration.
-After the Cloudflare site is verified, disable the old OpsMaru deployment workflow
-to avoid continuing to deploy to both hosts.
